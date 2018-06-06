@@ -24,5 +24,5 @@ export const PrimaryNav = StackNavigator({
     LevelScreen: {screen: Level},
     QuizScreen: {screen: Quiz},
 }, {
-
+    headerMode: 'none',
 })
