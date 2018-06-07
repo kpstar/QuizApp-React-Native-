@@ -36,7 +36,7 @@ export default class Level extends Component {
     async onBtnClick() {        
         let res = await getQuestions('bins/vw1sa')
         console.log('question res', res)
-        this.props.navigation.navigate('PlayquizScreen', {questions: res.Additions.question})
+        this.props.navigation.navigate('QuestionScreen', {questions: res.Additions.question})
     }
 }
 

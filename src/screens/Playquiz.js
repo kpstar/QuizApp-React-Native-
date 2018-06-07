@@ -24,7 +24,7 @@ export default class Playquiz extends Component {
     this.setState({ quizFinish: true, score : score })
   }
   _scoreMessage(score){
-    if(score <= 30){
+    if(score <= 1){
       return (<View style={styles.innerContainer} >
                 <View style={{ flexDirection: "row"}} >
                   <Icon name="trophy" size={30} color="white" />
@@ -32,7 +32,7 @@ export default class Playquiz extends Component {
                 <Text style={styles.score}>You need to work hard</Text>
                 <Text style={styles.score}>You scored {score}%</Text>
               </View>)
-    }else if(score > 30 && score < 60){
+    }else if(score > 2 && score < 3){
       return (<View style={styles.innerContainer} >
                   <View style={{ flexDirection: "row"}} >
                     <Icon name="trophy" size={30} color="white" />
@@ -41,7 +41,7 @@ export default class Playquiz extends Component {
                   <Text style={styles.score}>You are good</Text>
                   <Text style={styles.score}>Congrats you scored {score}% </Text>
                 </View>)
-    }else if(score >= 60){
+    }else if(score >= 3){
       return (<View style={styles.innerContainer}>
                  <View style={{ flexDirection: "row"}} >
                      <Icon name="trophy" size={30} color="white" />

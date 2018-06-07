@@ -18,6 +18,7 @@ import Login from "./screens/Login"
 import Level from "./screens/Level"
 import Quiz from "./screens/Quiz"
 import Playquiz from "./screens/Playquiz"
+import Question from "./screens/Question"
 
 export const PrimaryNav = StackNavigator({
 
@@ -25,6 +26,7 @@ export const PrimaryNav = StackNavigator({
     LevelScreen: {screen: Level},
     QuizScreen: {screen: Quiz},
     PlayquizScreen: {screen: Playquiz},
+    QuestionScreen: {screen: Question},
 }, {
     headerMode: 'none',
 })

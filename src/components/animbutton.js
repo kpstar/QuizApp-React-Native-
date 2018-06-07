@@ -12,7 +12,7 @@ export default class Animbutton extends Component {
      }
    }
    _onPress(){
-     this.props._onPress(!this.state.status)
+     //this.props._onPress(!this.state.status)
      this.setState({ status: !this.state.status})
      switch (this.props.effect) {
        case 'bounce':
