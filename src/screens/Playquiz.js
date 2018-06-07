@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     width: scoreCircleSize,
     height: scoreCircleSize,
     borderRadius: scoreCircleSize/2,
+    marginTop: 150,
     backgroundColor: "green"
   },
   innerContainer: {

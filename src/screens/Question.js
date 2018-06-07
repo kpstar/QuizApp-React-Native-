@@ -92,13 +92,19 @@ export default class Question extends Component {
                     })}
                 </Content>
             </Container> : 
-                <View>
+                <View style={{flex:1}}>
+                    <StatusBar barStyle="light-content"/>
                     <View style={styles.toolbar}>
                         <TouchableOpacity onPress={() => this._onPressBack() }><Text style={styles.toolbarButton}>Back</Text></TouchableOpacity>
                         <Text style={styles.toolbarTitle}></Text>
                         <Text style={styles.toolbarButton}></Text>
                     </View>
                     <Text style={styles.scores}>Scores: {this.state.score}</Text>
+                    <View style={styles.containers}>
+                        <View style={styles.circle}>
+                            <Text style={styles.congra}>Congratulations</Text>
+                        </View>
+                    </View>
                 </View>
         )
     }
@@ -108,7 +114,7 @@ export default class Question extends Component {
           goBack()
       }
 }
-
+const scoreCircleSize = 300
 const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
@@ -118,6 +124,12 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.backgroundPrimary,
         justifyContent: 'center',
     },
+    containers: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+      },
     form: {
         marginVertical: 20,
     },
@@ -154,5 +166,23 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontWeight:'bold',
         flex:1
-    }
+    },
+    congra:{
+        color:'#f00',
+        fontSize: 30,
+        fontWeight:'bold',
+    },
+    score: {
+        color: "white",
+        fontSize: 20,
+        fontStyle: 'italic'
+      },
+      circle: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: scoreCircleSize,
+        height: scoreCircleSize,
+        borderRadius: scoreCircleSize/2,
+        backgroundColor: "green"
+      },
 });
