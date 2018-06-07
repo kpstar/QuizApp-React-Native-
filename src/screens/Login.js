@@ -5,6 +5,7 @@ import {
     View, 
     Image
   } from 'react-native';
+import { images, Colors } from '../theme';
 import { Container, Content, Button, Icon, Form, Item, Label, Input, Text, Footer} from 'native-base';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 export default class FloatingLabelExample extends Component {
@@ -18,21 +19,20 @@ export default class FloatingLabelExample extends Component {
   render() {
     return (
         <Container>
-        <Content contentContainerStyle={styles.container}>
-            
-            <Form style={styles.form}>
-                <Item floatingLabel last>
-                    <Label>Email</Label>
-                    <Input autoCapitalize='none' autoCorrect={false} value={this.state.email} onChangeText={text=>this.setState({email: text})}/>
-                </Item>
-                <Item floatingLabel last>
-                    <Label>Password</Label>
-                    <Input secureTextEntry={true} value={this.state.password} onChangeText={text=>this.setState({password: text})}/>
-                </Item>
-            </Form>
-            <Button block primary onPress={this.onLogin.bind(this)}><Text>Sign in</Text></Button>
-        </Content>
-    </Container>
+            <Content contentContainerStyle={styles.container}>
+                <Form style={styles.form}>
+                    <Item floatingLabel last>
+                        <Label>Email</Label>
+                        <Input autoCapitalize='none' autoCorrect={false} value={this.state.email} onChangeText={text=>this.setState({email: text})}/>
+                    </Item>
+                    <Item floatingLabel last>
+                        <Label>Password</Label>
+                        <Input secureTextEntry={true} value={this.state.password} onChangeText={text=>this.setState({password: text})}/>
+                    </Item>
+                </Form>
+                <Button block primary onPress={this.onLogin.bind(this)}><Text>Sign in</Text></Button>
+            </Content>
+        </Container>
     );
   }
 
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         padding: 24,
         paddingTop: responsiveHeight(5),
-        // backgroundColor: Colors.backgroundPrimary,
+        backgroundColor: Colors.backgroundPrimary,
     },
     welcome: {
         fontSize: 20,
