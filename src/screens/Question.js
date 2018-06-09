@@ -5,7 +5,8 @@ import {
   StatusBar,
   TouchableOpacity,
   View, 
-  Image
+  Image,
+  FlatList,
 } from 'react-native';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import { Container, Button, Text, Content, Form} from 'native-base';
@@ -24,6 +25,7 @@ export default class Question extends Component {
             answeredIndex: -1,
             isCorrect: false,
             correctAnswer: "",
+            total_question: 0,
         }
 
     }
@@ -43,6 +45,8 @@ export default class Question extends Component {
 
     componentDidMount() {
         const { state: { params: { questions } } } = this.props.navigation
+        const { total_question } = this.state
+        this.setState({ total_question : questions.length, })
         this.setStateFromQuestions(questions)
     }
 
@@ -72,14 +76,17 @@ export default class Question extends Component {
 
     render() {
         console.log("render")
-        const {currentQuestion, questions} = this.state
+        const {currentQuestion, questions, total_question} = this.state
+
+        let now_question = total_question - questions.length + 1
         return (
             questions.length > 0 ?
             <Container>
                 <Content contentContainerStyle={styles.container}>
-                    {/* <Text>Questions 1/5</Text> */}
+                    <Text style={styles.scored}>Score: {this.state.score}</Text>
+                    <Text style={styles.questionnum}>Questions {now_question}/{total_question}</Text>
                     <Text style={styles.question}>{currentQuestion.description}</Text>
-                    {Object.values(currentQuestion.answers).map((answer, index)=>{
+                    {/* {Object.values(currentQuestion.answers).map((answer, index)=>{
                         return (
                             <Button 
                                 key={answer} 
@@ -88,9 +95,26 @@ export default class Question extends Component {
                                 borderColor='#000000'
                                 success={this.state.isCorrect}  
                                 danger={!this.state.isCorrect}  
-                                onPress={this.onBtnClick.bind(this, index)} style={styles.answerbutton}><Text>{answer}</Text></Button>                    
+                                onPress={this.onBtnClick.bind(this, index)} style={styles.answerbutton}><Text>{answer}</Text></Button>                                              
                         )
-                    })}
+                    })} */}
+                    <FlatList
+                        contentContainerStyle={styles.listContainer}
+                        data={Object.values(currentQuestion.answers)}
+                        numColumns={2}
+                        renderItem={({ item, index }) => {
+                            return (
+                            <View style={{justifyContent: 'center',  margin: 10, width: 100, height: 100}}>
+                                <Button block 
+                                bordered={this.state.answeredIndex!=index} 
+                                success={this.state.isCorrect} 
+                                danger={!this.state.isCorrect}
+                                onPress={this.onBtnClick.bind(this, index)}
+                                style={{flex:1, margin: 10}}> <Text>{item}</Text> </Button>
+                            </View>)}}
+                        keyExtractor={(item, index) => index.toString()}
+
+                    />  
                 </Content>
             </Container> : 
                 <View style={{flex:1}}>
@@ -123,7 +147,6 @@ const styles = StyleSheet.create({
         marginVertical: 30,
         paddingTop: responsiveHeight(5),
         backgroundColor: Colors.backgroundPrimary,
-        justifyContent: 'center',
     },
     containers: {
         flex: 1,
@@ -135,6 +158,7 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     question: {
+        marginTop: 50,
         fontSize: 24,
         textAlign: 'center'
     },
@@ -145,6 +169,16 @@ const styles = StyleSheet.create({
         marginTop: 20,
         fontSize: 25,
         color: Colors.textPrimary,
+        justifyContent: 'flex-end',
+        padding: 5, 
+        marginLeft: 20,
+        position: 'absolute',
+        alignSelf: 'flex-end',
+    },
+    scored:{
+        marginTop: 20,
+        fontSize: 20,
+        color: '#f00',
         justifyContent: 'flex-end',
         padding: 5, 
         marginLeft: 20,
@@ -168,9 +202,20 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         flex:1
     },
+    listContainer: {
+        padding: 10,
+        marginTop: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     congra:{
         color:'#f00',
         fontSize: 30,
+        fontWeight:'bold',
+    },
+    questionnum:{
+        color:'#f00',
+        fontSize: 26,
         fontWeight:'bold',
     },
     score: {
