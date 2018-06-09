@@ -20,21 +20,33 @@ export default class Level extends Component {
             <Container>
                 <Content contentContainerStyle={styles.container}>
                     <Form style={styles.form}>
-                        <Button block success onPress={this.onBtnClick.bind(this)}><Text>Easy</Text></Button>
+                        <Button block success onPress={this.onEasyBtnClick.bind(this)}><Text>Easy</Text></Button>
                     </Form>
                     <Form style={styles.form}>
-                        <Button block warning><Text>Medium</Text></Button>
+                        <Button block warning onPress={this.onMediumBtnClick.bind(this)}><Text>Medium</Text></Button>
                     </Form>
                     <Form style={styles.form}>
-                        <Button block danger><Text>Hard</Text></Button>
+                        <Button block danger onPress={this.onHardBtnClick.bind(this)}><Text>Hard</Text></Button>
                     </Form>
                 </Content>
             </Container>
         )
     }
 
-    async onBtnClick() {        
+    async onEasyBtnClick() {        
         let res = await getQuestions('bins/vw1sa')
+        console.log('question res', res)
+        this.props.navigation.navigate('QuestionScreen', {questions: res.Additions.question})
+    }
+
+    async onMediumBtnClick() {        
+        let res = await getQuestions('bins/cbm7u')
+        console.log('question res', res)
+        this.props.navigation.navigate('QuestionScreen', {questions: res.Additions.question})
+    }
+
+    async onHardBtnClick() {        
+        let res = await getQuestions('bins/us1yy')
         console.log('question res', res)
         this.props.navigation.navigate('QuestionScreen', {questions: res.Additions.question})
     }
