@@ -77,7 +77,7 @@ export default class Question extends Component {
             questions.length > 0 ?
             <Container>
                 <Content contentContainerStyle={styles.container}>
-                    <Text>Questions 1/5</Text>
+                    {/* <Text>Questions 1/5</Text> */}
                     <Text style={styles.question}>{currentQuestion.description}</Text>
                     {Object.values(currentQuestion.answers).map((answer, index)=>{
                         return (
